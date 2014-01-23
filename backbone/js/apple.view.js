@@ -5,13 +5,8 @@ var appleView = Backbone.View.extend({
 		this.model.bind('change', this.render, this);
 		this.bind('spinner', this.showSpinner, this);
 	},
-	template : _.template(
-		'<figure>' +
-		'<img src="<%= attributes.url %>"/>' +
-		'<figcaption><%= attributes.name %></figcaption>' +
-		'</figure>'
-		),
-	templateSpinner : '<img src="img/spinner.gif" width="30"/>',
+	template : _.template(appleTpl),
+	templateSpinner : appleSpinnerTpl,
 	loadApple : function(appleName){
 		this.trigger('spinner');
 		// show spinner GIF image

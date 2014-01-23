@@ -2,11 +2,7 @@ var homeView = Backbone.View.extend({
 	el : 'body',
 	listEl : '.apples-list',
 	cartEl : '.cart-box',
-	template : _.template(
-		'Apple data: '+
-		'<ul class="apples-list"></ul>'+
-		'<div class="cart-box"></div>'
-		),
+	template : _.template(appleHomeTpl),
 	initialize : function(){
 		this.$el.html(this.template);
 		this.collection.on('addToCart', this.showCart, this);
