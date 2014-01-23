@@ -1,1 +1,1 @@
-var Apples = Backbone.Collection.extend({});
+define(function(){ return Backbone.Collection.extend({}); });

@@ -1,4 +1,5 @@
-var appleHomeTpl = 'Apple data: '+
+define(function(){
+return 'Apple data: '+
 	'<ul class="apples-list"></ul>'+
-	'<div class="cart-box"></div>';
-		
+	'<div class="cart-box"></div>';	
+});
