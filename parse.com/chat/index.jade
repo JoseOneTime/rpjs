@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+	head
+		title RPJS: Parse.com example with REST API and jQuery
+		script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+		script(src='js/app.js')
+		link(rel='stylesheet', href='css/bootstrap.min.css')
+		link(rel='stylesheet', href='css/bootstrap-responsive.min.css')
+		link(rel='stylesheet', href='css/style.css')
+	body
+		.container-fluid
+			.row-fluid
+				h1 Chat with Parse REST API
+				table.table.table-bordered.table-striped
+					thead
+						tr
+							th Username
+							th Message
+					tbody
+						tr
+							td(colspan='2') No messages
+			.row-fluid
+				form#new-user
+					input(type='text', 
+						name='username',
+						placeholder='Username')
+					input(type='text',
+						name='message',
+						placeholder='Message')
+					a#send.btn.btn-primary Send
