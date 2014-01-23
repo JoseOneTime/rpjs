@@ -32,13 +32,28 @@ var router = Backbone.Router.extend({
 
 var homeView = Backbone.View.extend({
 	el : 'body',
-	template : _.template('Apple data: <%= data %>'),
+	listEl : '.apples-list',
+	cartEl : '.cart-box',
+	template : _.template(
+		'Apple data: '+
+		'<ul class="apples-list"></ul>'+
+		'<div class="cart-box"></div>'
+		),
+	initialize : function(){
+		this.$el.html(this.template);
+		this.collection.on('addToCart', this.showCart, this);
+	},
+	showCart : function(appleModel){
+		$(this.cartEl).append(appleModel.attributes.name+'<br/>');
+	},
 	render : function(){
-		this.$el.html(this.template({
-			data : JSON.stringify(this.collection.models)
-		}));
+		view = this;
+		this.collection.each(function(apple){
+			var appleSubView = new appleItemView({ model : apple });
+			appleSubView.render();
+			$(view.listEl).append(appleSubView.$el);
+		});
 	}
-	// TODO subviews
 });
 
 var Apples = Backbone.Collection.extend({});
@@ -77,6 +92,22 @@ var appleView = Backbone.View.extend({
 	},
 	showSpinner : function(){
 		$('body').html(this.templateSpinner);
+	}
+});
+
+var appleItemView = Backbone.View.extend({
+	tagName : 'li',
+	template : _.template(
+		'<a href="#apples/<%=name%>" target="_blank">' +
+		'<%=name%>' + 
+		'</a>&nbsp;<a class="add-to-cart" href="#">buy</a>'
+		),
+	events : { 'click .add-to-cart' : 'addToCart'},
+	render : function(){
+		this.$el.html(this.template(this.model.attributes));
+	},
+	addToCart : function(){
+		this.model.collection.trigger('addToCart', this.model);
 	}
 });
 
